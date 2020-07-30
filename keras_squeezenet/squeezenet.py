@@ -3,9 +3,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.layers import Input, Convolution2D, MaxPooling2D, Activation, concatenate, Dropout
 from tensorflow.keras.layers import GlobalAveragePooling2D, GlobalMaxPooling2D
 from tensorflow.keras.models import Model
-from tensorflow.keras.engine.topology import get_source_inputs
-from tensorflow.keras.utils import get_file
-from tensorflow.keras.utils import layer_utils
+from tensorflow.keras.utils import get_source_inputs,get_file
 
 
 sq1x1 = "squeeze1x1"
@@ -21,10 +19,7 @@ WEIGHTS_PATH_NO_TOP = "https://github.com/rcmalli/keras-squeezenet/releases/down
 def fire_module(x, fire_id, squeeze=16, expand=64):
     s_id = 'fire' + str(fire_id) + '/'
 
-    if K.image_data_format() == 'channels_first':
-        channel_axis = 1
-    else:
-        channel_axis = 3
+    channel_axis = 3
     
     x = Convolution2D(squeeze, (1, 1), padding='valid', name=s_id + sq1x1)(x)
     x = Activation('relu', name=s_id + relu + sq1x1)(x)
@@ -131,20 +126,5 @@ def SqueezeNet(include_top=True, weights='imagenet',
                                     cache_subdir='models')
             
         model.load_weights(weights_path)
-        if K.backend() == 'theano':
-            layer_utils.convert_all_kernels_in_model(model)
-
-        # if K.image_data_format() == 'channels_first':
-
-        #     if K.backend() == 'tensorflow':
-        #         warnings.warn('You are using the TensorFlow backend, yet you '
-        #                       'are using the Theano '
-        #                       'image data format convention '
-        #                       '(`image_data_format="channels_first"`). '
-        #                       'For best performance, set '
-        #                       '`image_data_format="channels_last"` in '
-        #                       'your Keras config '
-        #                       'at ~/.keras/keras.json.')
+       
     return model
-
-
