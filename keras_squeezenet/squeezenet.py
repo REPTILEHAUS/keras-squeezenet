@@ -1,6 +1,6 @@
 from keras_applications.imagenet_utils import _obtain_input_shape
 from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Input, Convolution2D, MaxPooling2D, Activation, concatenate, Dropout, warnings
+from tensorflow.keras.layers import Input, Convolution2D, MaxPooling2D, Activation, concatenate, Dropout
 from tensorflow.keras.layers import GlobalAveragePooling2D, GlobalMaxPooling2D
 from tensorflow.keras.models import Model
 from tensorflow.keras.engine.topology import get_source_inputs
@@ -136,15 +136,15 @@ def SqueezeNet(include_top=True, weights='imagenet',
 
         if K.image_data_format() == 'channels_first':
 
-            if K.backend() == 'tensorflow':
-                warnings.warn('You are using the TensorFlow backend, yet you '
-                              'are using the Theano '
-                              'image data format convention '
-                              '(`image_data_format="channels_first"`). '
-                              'For best performance, set '
-                              '`image_data_format="channels_last"` in '
-                              'your Keras config '
-                              'at ~/.keras/keras.json.')
+            # if K.backend() == 'tensorflow':
+            #     warnings.warn('You are using the TensorFlow backend, yet you '
+            #                   'are using the Theano '
+            #                   'image data format convention '
+            #                   '(`image_data_format="channels_first"`). '
+            #                   'For best performance, set '
+            #                   '`image_data_format="channels_last"` in '
+            #                   'your Keras config '
+            #                   'at ~/.keras/keras.json.')
     return model
 
 
