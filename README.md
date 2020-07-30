@@ -1,3 +1,5 @@
+# Updated by REPTILEHAUS for TensorFlow 2 project
+
 # keras-squeezenet [![Build Status](https://travis-ci.org/rcmalli/keras-squeezenet.svg?branch=master)](https://travis-ci.org/rcmalli/keras-squeezenet)
 SqueezeNet v1.1 Implementation using Keras Functional Framework 2.0
 
